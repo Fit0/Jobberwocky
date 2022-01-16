@@ -107,6 +107,7 @@ class OfferController extends Controller
                     'skill' => $offer->skills,
                     'country' => $offer->country->name,
                     'remote' => $offer->remote,
+                    'salary' => $offer->salary,
                     'public' => $offer->created_at
                 )
             ];
@@ -124,18 +125,38 @@ class OfferController extends Controller
     /**
      * @OA\Get(
      *     tags={"Offer"},
-     *     path="/api/searchOffer/{query}/{country_id}",
+     *     path="/api/searchOffer/{name}/{salaryMin}/{salaryMax}/{country_id}",
      *     summary="Displays the details of the offer",
      *      @OA\Parameter(
-     *          name="query",
+     *          name="name",
      *          in="path",
-     *          required=false,
+     *          required=true,
      *          description="Name of the offer",
      *          explode=true,
      *          @OA\Schema(
      *              type="string"
      *          )
      *      ),
+     *      @OA\Parameter(
+     *          name="salaryMin",
+     *          in="path",
+     *          required=true,
+     *          description="Salary minimum",
+     *          explode=true,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *     ),
+     *      @OA\Parameter(
+     *          name="salaryMax",
+     *          in="path",
+     *          required=true,
+     *          description="Salary maximun",
+     *          explode=true,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *     ),
      *      @OA\Parameter(
      *          name="country_id",
      *          in="path",
@@ -157,14 +178,18 @@ class OfferController extends Controller
      *
      * )
      */
-    function searchOffer(string $query, int $country_id)
+    function searchOffer(string $name, int $salaryMin, int $salaryMax, int $country_id)
     {
+
+        $country  = \App\Models\Country::find($country_id);
+
+        $offerList[] = $this->getOffersExternal($name, $salaryMin, $salaryMax, $country->name);
+
         $offers = \App\Models\Offer::where('country_id', $country_id)
-            ->Where('name', 'like', '%' . $query . '%')
+            ->Where('name', 'like', '%' . $name . '%')
+            ->whereBetween('salary', [$salaryMin, $salaryMax])
             ->orderBy('created_at', 'DESC')
             ->get();
-
-        $offerList = [];
 
         if (is_object($offers)) {
             foreach ($offers as $offer) {
@@ -175,6 +200,7 @@ class OfferController extends Controller
                     'skill' => $offer->skills,
                     'country' => $offer->country->name,
                     'remote' => $offer->remote,
+                    'salary' => $offer->salary,
                     'public' => $offer->created_at
                 );
             }
@@ -405,9 +431,16 @@ class OfferController extends Controller
         return $this->urlApiExternal;
     }
 
-    private function getOffersExternal()
+    private function getOffersExternal(string $name = null, float $salaryMin = null, float $salaryMax = null, string $country = null)
     {
-        $endpoint = env('API_EXTERNAL') . '/jobs';
+        $resultArray=[];
+
+        $arg = !is_null($name) ? 'name=' . $name : '';
+        $arg .= !is_null($salaryMin) ? '&salary_min=' . $salaryMin : '';
+        $arg .= !is_null($salaryMin) ? '&salary_max=' . $salaryMax : '';
+        $arg .= !is_null($country) ? '&country=' . $country : '';
+
+        $endpoint = env('API_EXTERNAL') . '/jobs?' . $arg;
         $offerList = new \GuzzleHttp\Client();
         $response = $offerList->request('GET', $endpoint);
         $data = json_decode($response->getBody(), true);
@@ -418,7 +451,7 @@ class OfferController extends Controller
                     $skillOffer = array(
                         'id' => 0,
                         'name' => $skill,
-                        "created_at"=>null,
+                        "created_at" => null,
                         "updated_at" => null,
                         "pivot" => null
                     );

@@ -31,10 +31,9 @@ Route::put('updateCountry', 'Api\CountryController@update');
 Route::delete('delCountry/{id}', 'Api\CountryController@destroy');
 
 /* Offers */
-
 Route::get('offers', 'Api\OfferController@index');
 Route::get('showOffer/{id}', 'Api\OfferController@showOffer');
-Route::get('searchOffer/{query}/{country_id}', 'Api\OfferController@searchOffer');
+Route::get('searchOffer/{name}/{salaryMin}/{salaryMax}/{country_id}', 'Api\OfferController@searchOffer');
 Route::post('storeOffer', 'Api\OfferController@store');
 Route::put('updateOffer', 'Api\OfferController@update');
 Route::delete('delOffer/{id}', 'Api\OfferController@destroy');

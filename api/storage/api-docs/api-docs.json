@@ -202,22 +202,42 @@
                 }
             }
         },
-        "/api/searchOffer/{query}/{country_id}": {
+        "/api/searchOffer/{name}/{salaryMin}/{salaryMax}/{country_id}": {
             "get": {
                 "tags": [
                     "Offer"
                 ],
                 "summary": "Displays the details of the offer",
-                "operationId": "c06e987b9c59e91f65ab71b2dab42351",
+                "operationId": "6a042144ad09485710d3698190cefbec",
                 "parameters": [
                     {
-                        "name": "query",
+                        "name": "name",
                         "in": "path",
                         "description": "Name of the offer",
-                        "required": false,
+                        "required": true,
                         "explode": true,
                         "schema": {
                             "type": "string"
+                        }
+                    },
+                    {
+                        "name": "salaryMin",
+                        "in": "path",
+                        "description": "Salary minimum",
+                        "required": true,
+                        "explode": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "salaryMax",
+                        "in": "path",
+                        "description": "Salary maximun",
+                        "required": true,
+                        "explode": true,
+                        "schema": {
+                            "type": "integer"
                         }
                     },
                     {
