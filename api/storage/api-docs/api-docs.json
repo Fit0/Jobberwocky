@@ -298,14 +298,14 @@
                                     "salary": {
                                         "description": "Salary of the job",
                                         "format": "number",
-                                        "default": "42,000 $"
+                                        "default": "42000"
                                     },
                                     "country_id": {
                                         "description": "country id",
                                         "format": "number",
                                         "default": "1"
                                     },
-                                    "skills": {
+                                    "skill": {
                                         "description": "id skills separated by comma",
                                         "format": "string",
                                         "default": "5, 2"

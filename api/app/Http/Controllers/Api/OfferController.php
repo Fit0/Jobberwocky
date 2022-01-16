@@ -234,9 +234,9 @@ class OfferController extends Controller
      *                 @OA\Property(format="string", default="New job offer", description="name of the new job offer", property="name"),
      *                 @OA\Property(format="string", default="Description of the new job offer", description="Description of the new job offer", property="description"),
      *                 @OA\Property(format="boolean", default="1", description="remote job", property="remote"),
-     *                 @OA\Property(format="number", default="42,000 $", description="Salary of the job", property="salary"),
+     *                 @OA\Property(format="number", default="42000", description="Salary of the job", property="salary"),
      *                 @OA\Property(format="number", default="1", description="country id", property="country_id"),
-     *                 @OA\Property(format="string", default="5, 2", description="id skills separated by comma", property="skills"),
+     *                 @OA\Property(format="string", default="5, 2", description="id skills separated by comma", property="skill"),
      *             )
      *         )
      *     ),
@@ -271,7 +271,9 @@ class OfferController extends Controller
             $lastId = \App\Models\Offer::latest('id')->first();
 
             foreach ($data['skill'] as $skill) {
-                $lastId->skills()->attach($skill);
+                if (!empty($skill)) {
+                    $lastId->skills()->attach($skill);
+                }
             }
 
             $resp = array(
@@ -442,7 +444,7 @@ class OfferController extends Controller
 
     private function getOffersExternal(string $name = null, float $salaryMin = null, float $salaryMax = null, string $country = null)
     {
-        $resultArray=[];
+        $resultArray = [];
 
         $arg = !is_null($name) ? 'name=' . $name : '';
         $arg .= !is_null($salaryMin) ? '&salary_min=' . $salaryMin : '';
