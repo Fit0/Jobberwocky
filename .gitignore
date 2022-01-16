@@ -15,4 +15,3 @@ storage/*.key
 Homestead.yaml
 Homestead.json
 /.vagrant
-api/database/migrations/2022_01_15_214110_create_offers_table.php

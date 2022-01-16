@@ -10,7 +10,7 @@ services:
     ports:
       - 251:80
     volumes:
-      - ./public:/appdata/www/public
+      - ./public/:/appdata/www/public
     depends_on:
       - laravel-api-jobberwocky-be
     networks:

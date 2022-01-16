@@ -1,0 +1,31 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Jobberwocky",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:251"
+        }
+    ],
+    "paths": {
+        "/api/offers": {
+            "get": {
+                "summary": "Show all offers of jobs",
+                "operationId": "f44a8eb32eda1fa0dc80455c835746b2",
+                "responses": {
+                    "200": {
+                        "description": "Show all offers of jobs."
+                    },
+                    "default": {
+                        "description": "We have had some problems."
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
