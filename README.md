@@ -25,7 +25,7 @@ make run
 
 and to stop the service, 
 
-run make stop
+make stop
 
 When docker starts, the jobberwocky_db database is generated. The connection data to the database are:
 
