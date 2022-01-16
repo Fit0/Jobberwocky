@@ -17,7 +17,7 @@ class CreateOffersTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->boolean('remote');
+            $table->boolean('remote')->default(false);
             $table->float('salary');
             $table->timestamps();
         });

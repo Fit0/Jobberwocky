@@ -10,16 +10,529 @@
         }
     ],
     "paths": {
+        "/api/country": {
+            "get": {
+                "tags": [
+                    "Country"
+                ],
+                "summary": "Show all countries for jobs",
+                "operationId": "d9d2e793741d06032ade48368011a411",
+                "responses": {
+                    "200": {
+                        "description": "ok."
+                    },
+                    "default": {
+                        "description": "An error has occurred."
+                    }
+                }
+            }
+        },
+        "/api/showCountry/{id}": {
+            "get": {
+                "tags": [
+                    "Country"
+                ],
+                "summary": "Displays the details of a country",
+                "operationId": "675b944c8d7666b81fc35e8ea305920c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "country identifier",
+                        "required": true,
+                        "explode": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok."
+                    },
+                    "404": {
+                        "description": "404 Not Found."
+                    }
+                }
+            }
+        },
+        "/api/storeCountry": {
+            "post": {
+                "tags": [
+                    "Country"
+                ],
+                "summary": "Add a new Country",
+                "operationId": "c5bf0e26f39f467bd214e8c9d5505822",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "name of the new country",
+                                        "format": "string",
+                                        "default": "Spain"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok."
+                    },
+                    "404": {
+                        "description": "404 Not Found."
+                    }
+                }
+            }
+        },
+        "/api/updateCountry": {
+            "put": {
+                "tags": [
+                    "Country"
+                ],
+                "summary": "Upgrade an existing country.",
+                "operationId": "1011ed95f3b6ebe680582ccf7a972de6",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "description": "id of the country",
+                                        "format": "number",
+                                        "default": "1"
+                                    },
+                                    "name": {
+                                        "description": "name of the country",
+                                        "format": "string",
+                                        "default": "Spain"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok."
+                    },
+                    "404": {
+                        "description": "404 Not Found."
+                    }
+                }
+            }
+        },
+        "/api/delCountry/{id}": {
+            "delete": {
+                "tags": [
+                    "Country"
+                ],
+                "summary": "Delete a selected country",
+                "operationId": "228f7e06695f17de91e14b513adfc592",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Country identifier",
+                        "required": true,
+                        "explode": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok."
+                    },
+                    "404": {
+                        "description": "404 Not Found."
+                    }
+                }
+            }
+        },
         "/api/offers": {
             "get": {
+                "tags": [
+                    "Offer"
+                ],
                 "summary": "Show all offers of jobs",
                 "operationId": "f44a8eb32eda1fa0dc80455c835746b2",
                 "responses": {
                     "200": {
-                        "description": "Show all offers of jobs."
+                        "description": "ok."
                     },
                     "default": {
-                        "description": "We have had some problems."
+                        "description": "An error has occurred."
+                    }
+                }
+            }
+        },
+        "/api/showOffer/{id}": {
+            "get": {
+                "tags": [
+                    "Offer"
+                ],
+                "summary": "Displays the details of the offer",
+                "operationId": "a77ab4e8cfe1281f5a90da7910529243",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Offer identifier",
+                        "required": true,
+                        "explode": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok."
+                    },
+                    "404": {
+                        "description": "404 Not Found."
+                    }
+                }
+            }
+        },
+        "/api/searchOffer/{query}/{country_id}": {
+            "get": {
+                "tags": [
+                    "Offer"
+                ],
+                "summary": "Displays the details of the offer",
+                "operationId": "c06e987b9c59e91f65ab71b2dab42351",
+                "parameters": [
+                    {
+                        "name": "query",
+                        "in": "path",
+                        "description": "Name of the offer",
+                        "required": false,
+                        "explode": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "country_id",
+                        "in": "path",
+                        "description": "Country identifier",
+                        "required": true,
+                        "explode": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok."
+                    },
+                    "404": {
+                        "description": "404 Not Found."
+                    }
+                }
+            }
+        },
+        "/api/storeOffer": {
+            "post": {
+                "tags": [
+                    "Offer"
+                ],
+                "summary": "Add a new offer fito",
+                "operationId": "bd2c9e0cefe8e58344eeffeb926ea3e3",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "name of the new job offer",
+                                        "format": "string",
+                                        "default": "New job offer"
+                                    },
+                                    "description": {
+                                        "description": "Description of the new job offer",
+                                        "format": "string",
+                                        "default": "Description of the new job offer"
+                                    },
+                                    "remote": {
+                                        "description": "remote job",
+                                        "format": "boolean",
+                                        "default": "1"
+                                    },
+                                    "salary": {
+                                        "description": "Salary of the job",
+                                        "format": "number",
+                                        "default": "42,000 $"
+                                    },
+                                    "country_id": {
+                                        "description": "country id",
+                                        "format": "number",
+                                        "default": "1"
+                                    },
+                                    "skills": {
+                                        "description": "id skills separated by comma",
+                                        "format": "string",
+                                        "default": "5, 2"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok."
+                    },
+                    "404": {
+                        "description": "404 Not Found."
+                    }
+                }
+            }
+        },
+        "/api/updateOffer": {
+            "put": {
+                "tags": [
+                    "Offer"
+                ],
+                "summary": "Upgrade an existing offer.",
+                "operationId": "68d6d9b367d3f143f7458a71d9d7d9ce",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "description": "id",
+                                        "format": "id",
+                                        "default": "1"
+                                    },
+                                    "name": {
+                                        "description": "name of the new job offer",
+                                        "format": "string",
+                                        "default": "New job offer"
+                                    },
+                                    "description": {
+                                        "description": "Description of the new job offer",
+                                        "format": "string",
+                                        "default": "Description of the new job offer"
+                                    },
+                                    "remote": {
+                                        "description": "remote job",
+                                        "format": "boolean",
+                                        "default": "1"
+                                    },
+                                    "salary": {
+                                        "description": "Salary of the job",
+                                        "format": "number",
+                                        "default": "42,000 $"
+                                    },
+                                    "country_id": {
+                                        "description": "country id",
+                                        "format": "number",
+                                        "default": "1"
+                                    },
+                                    "skills": {
+                                        "description": "skills",
+                                        "format": "string",
+                                        "default": "5, 2"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok."
+                    },
+                    "404": {
+                        "description": "404 Not Found."
+                    }
+                }
+            }
+        },
+        "/api/delOffer/{id}": {
+            "delete": {
+                "tags": [
+                    "Offer"
+                ],
+                "summary": "Delete a selected offer",
+                "operationId": "877ccd3ac6d89dc004135f102dd3bb47",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Offer identifier",
+                        "required": true,
+                        "explode": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok."
+                    },
+                    "404": {
+                        "description": "404 Not Found."
+                    }
+                }
+            }
+        },
+        "/api/skills": {
+            "get": {
+                "tags": [
+                    "Skill"
+                ],
+                "summary": "Show all skills for jobs",
+                "operationId": "7ef1b9241bba8e292fcb019dbe334fc0",
+                "responses": {
+                    "200": {
+                        "description": "ok."
+                    },
+                    "default": {
+                        "description": "An error has occurred."
+                    }
+                }
+            }
+        },
+        "/api/showSkill/{id}": {
+            "get": {
+                "tags": [
+                    "Skill"
+                ],
+                "summary": "Displays the details of the skill",
+                "operationId": "5c6d456c2c0865dd7fbb58d0352f442d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "skill identifier",
+                        "required": true,
+                        "explode": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok."
+                    },
+                    "404": {
+                        "description": "404 Not Found."
+                    }
+                }
+            }
+        },
+        "/api/storeSkill": {
+            "post": {
+                "tags": [
+                    "Skill"
+                ],
+                "summary": "Add a new Skill",
+                "operationId": "0a0024c277d2dc36b11676c0adfbff20",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "name of the new skill",
+                                        "format": "string",
+                                        "default": "Laravel"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok."
+                    },
+                    "404": {
+                        "description": "404 Not Found."
+                    }
+                }
+            }
+        },
+        "/api/updateSkill": {
+            "put": {
+                "tags": [
+                    "Skill"
+                ],
+                "summary": "Upgrade an existing skill.",
+                "operationId": "ceb700eb78263885c7b8dd7f28ad6934",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "description": "id of the skill",
+                                        "format": "number",
+                                        "default": "1"
+                                    },
+                                    "name": {
+                                        "description": "name of the new skill",
+                                        "format": "string",
+                                        "default": "Laravel"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok."
+                    },
+                    "404": {
+                        "description": "404 Not Found."
+                    }
+                }
+            }
+        },
+        "/api/delSkill/{id}": {
+            "delete": {
+                "tags": [
+                    "Skill"
+                ],
+                "summary": "Delete a selected skill",
+                "operationId": "d60134cd57ce8528bb4ca8f9a06b5ad2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "skill identifier",
+                        "required": true,
+                        "explode": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok."
+                    },
+                    "404": {
+                        "description": "404 Not Found."
                     }
                 }
             }

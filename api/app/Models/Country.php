@@ -9,9 +9,6 @@ class Country extends Model
 {
     use HasFactory;
 
-    protected $table = 'countries';
-    protected $fillable = ['name'];
-
     public function offers()
     {
         return $this->hasMany('App\Models\Offer');
