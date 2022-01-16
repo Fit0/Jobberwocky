@@ -89,23 +89,30 @@
                 }
             }
         },
-        "/api/updateCountry": {
+        "/api/updateCountry/{id}": {
             "put": {
                 "tags": [
                     "Country"
                 ],
                 "summary": "Upgrade an existing country.",
-                "operationId": "1011ed95f3b6ebe680582ccf7a972de6",
+                "operationId": "4743f318a0db3f6f592c320556d4dbbd",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Country identifier",
+                        "required": true,
+                        "explode": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/x-www-form-urlencoded": {
                             "schema": {
                                 "properties": {
-                                    "id": {
-                                        "description": "id of the country",
-                                        "format": "number",
-                                        "default": "1"
-                                    },
                                     "name": {
                                         "description": "name of the country",
                                         "format": "string",
@@ -319,23 +326,30 @@
                 }
             }
         },
-        "/api/updateOffer": {
+        "/api/updateOffer/{id}": {
             "put": {
                 "tags": [
                     "Offer"
                 ],
                 "summary": "Upgrade an existing offer.",
-                "operationId": "68d6d9b367d3f143f7458a71d9d7d9ce",
+                "operationId": "55a9354484cdc0e22cc248358feca97d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Offer identifier",
+                        "required": true,
+                        "explode": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/x-www-form-urlencoded": {
                             "schema": {
                                 "properties": {
-                                    "id": {
-                                        "description": "id",
-                                        "format": "id",
-                                        "default": "1"
-                                    },
                                     "name": {
                                         "description": "name of the new job offer",
                                         "format": "string",
@@ -354,7 +368,7 @@
                                     "salary": {
                                         "description": "Salary of the job",
                                         "format": "number",
-                                        "default": "42,000 $"
+                                        "default": "42000"
                                     },
                                     "country_id": {
                                         "description": "country id",
@@ -490,23 +504,30 @@
                 }
             }
         },
-        "/api/updateSkill": {
+        "/api/updateSkill/{id}": {
             "put": {
                 "tags": [
                     "Skill"
                 ],
                 "summary": "Upgrade an existing skill.",
-                "operationId": "ceb700eb78263885c7b8dd7f28ad6934",
+                "operationId": "d64b80828eda8f278da4b6224b6f6c5f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "skill identifier",
+                        "required": true,
+                        "explode": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/x-www-form-urlencoded": {
                             "schema": {
                                 "properties": {
-                                    "id": {
-                                        "description": "id of the skill",
-                                        "format": "number",
-                                        "default": "1"
-                                    },
                                     "name": {
                                         "description": "name of the new skill",
                                         "format": "string",

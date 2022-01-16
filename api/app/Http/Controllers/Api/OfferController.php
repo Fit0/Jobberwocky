@@ -294,18 +294,27 @@ class OfferController extends Controller
     /**
      * @OA\Put  (
      *     tags={"Offer"},
-     *     path="/api/updateOffer",
+     *     path="/api/updateOffer/{id}",
      *     summary="Upgrade an existing offer.",
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          description="Offer identifier",
+     *          explode=true,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *     ),
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="application/x-www-form-urlencoded",
      *             @OA\Schema(
      *                 type="object",
-     *                 @OA\Property(format="id", default="1", description="id", property="id"),
      *                 @OA\Property(format="string", default="New job offer", description="name of the new job offer", property="name"),
      *                 @OA\Property(format="string", default="Description of the new job offer", description="Description of the new job offer", property="description"),
      *                 @OA\Property(format="boolean", default="1", description="remote job", property="remote"),
-     *                 @OA\Property(format="number", default="42,000 $", description="Salary of the job", property="salary"),
+     *                 @OA\Property(format="number", default="42000", description="Salary of the job", property="salary"),
      *                 @OA\Property(format="number", default="1", description="country id", property="country_id"),
      *                 @OA\Property(format="string", default="5, 2", description="skills", property="skills")
      *             )
@@ -321,10 +330,10 @@ class OfferController extends Controller
      *     )
      * )
      */
-    function update(Request $request)
+    function update($id, Request $request)
     {
 
-        $data['id'] =  $request->input('id', null);
+        $data['id'] =  $id;
         $data['name'] =  $request->input('name', null);
         $data['description'] =  $request->input('description', null);
         $data['remote'] =  $request->input('remote', null);

@@ -135,14 +135,23 @@ class CountryController extends Controller
     /**
      * @OA\Put  (
      *     tags={"Country"},
-     *     path="/api/updateCountry",
+     *     path="/api/updateCountry/{id}",
      *     summary="Upgrade an existing country.",
+     *     @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          description="Country identifier",
+     *          explode=true,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *     ),
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="application/x-www-form-urlencoded",
      *             @OA\Schema(
      *                 type="object",
-     *                 @OA\Property(format="number", default="1", description="id of the country", property="id"),
      *                 @OA\Property(format="string", default="Spain", description="name of the country", property="name"),
      *             )
      *         )
@@ -157,9 +166,9 @@ class CountryController extends Controller
      *     )
      * )
      */
-    function update(Request $request)
+    function update($id,Request $request)
     {
-        $data['id'] =  $request->input('id', null);
+        $data['id'] =  $id;
         $data['name'] =  $request->input('name', null);
 
         if (!empty($data)) {

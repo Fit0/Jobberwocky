@@ -51,3 +51,5 @@ Offer
 Skill
 
 From where the different endpoints can be executed for the different actions they have: Add, Edit, Delete and Search.
+
+Finally, functional tests (Feature) have been carried out and passed without any problems.

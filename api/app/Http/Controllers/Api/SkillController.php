@@ -135,14 +135,23 @@ class SkillController extends Controller
     /**
      * @OA\Put  (
      *     tags={"Skill"},
-     *     path="/api/updateSkill",
+     *     path="/api/updateSkill/{id}",
      *     summary="Upgrade an existing skill.",
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          description="skill identifier",
+     *          explode=true,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *     ),
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="application/x-www-form-urlencoded",
      *             @OA\Schema(
      *                 type="object",
-     *                 @OA\Property(format="number", default="1", description="id of the skill", property="id"),
      *                 @OA\Property(format="string", default="Laravel", description="name of the new skill", property="name"),
      *             )
      *         )
@@ -157,9 +166,9 @@ class SkillController extends Controller
      *     )
      * )
      */
-    function update(Request $request)
+    function update($id,Request $request)
     {
-        $data['id'] =  $request->input('id', null);
+        $data['id'] = $id;
         $data['name'] =  $request->input('name', null);
 
         if (!empty($data)) {
